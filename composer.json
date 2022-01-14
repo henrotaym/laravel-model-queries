@@ -1,5 +1,5 @@
 {
-    "name": "henrotaym/laravel-query-model",
+    "name": "henrotaym/laravel-model-queries",
     "description": "Move your queries from your models.",
     "type": "library",
     "license": "MIT",
