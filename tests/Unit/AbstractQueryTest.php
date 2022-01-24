@@ -65,6 +65,27 @@ class AbstractQueryTest extends TestCase
        $this->assertEquals($count, $this->mocked_query->count());
     }
 
+    /** @test */
+    public function abstract_query_including_trashed_results()
+    {
+        $this->mockQuery();
+        $this->mocked_query->expects()->withTrashed()->passthru();
+        $this->mocked_underlying_query->expects()->withTrashed()->andReturnSelf();
+
+       $this->assertChainable($this->mocked_query->withTrashed());
+    }
+
+    /** @test */
+    public function abstract_query_eager_loading_relation()
+    {
+        $relation = "test";
+        $this->mockQuery();
+        $this->mocked_query->expects()->with($relation)->passthru();
+        $this->mocked_underlying_query->expects()->with($relation)->andReturnSelf();
+
+       $this->assertChainable($this->mocked_query->with($relation));
+    }
+
     /** @var AccountQuery */
     protected $query;
 
@@ -87,5 +108,12 @@ class AbstractQueryTest extends TestCase
         $this->mocked_underlying_query = $this->mockThis(Builder::class);
 
         $this->mocked_query->expects()->getQuery()->andReturn($this->mocked_underlying_query);
+    }
+
+    protected function assertChainable($response)
+    {
+        $this->assertInstanceOf(AccountQuery::class, $response);
+
+        return $this;
     }
 }

@@ -54,6 +54,31 @@ abstract class AbstractQuery implements QueryContract
     }
 
     /**
+     * Including soft deleted models.
+     * 
+     * @return QueryContract
+     */
+    public function withTrashed(): QueryContract
+    {
+        $this->getQuery()->withTrashed();
+
+        return $this;
+    }
+
+    /**
+     * Eager loading relation.
+     * 
+     * @param string $relation
+     * @return QueryContract
+     */
+    public function with(string $relation): QueryContract
+    {
+        $this->getQuery()->with($relation);
+
+        return $this;
+    }
+
+    /**
      * Getting underlying query.
      * 
      * @return mixed

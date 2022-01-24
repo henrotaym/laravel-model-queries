@@ -44,4 +44,19 @@ interface QueryContract extends AutoRegistrableContract
      * @return QueryContract
      */
     public function setQuery($query): QueryContract;
+
+    /**
+     * Including soft deleted models.
+     * 
+     * @return QueryContract
+     */
+    public function withTrashed(): QueryContract;
+
+    /**
+     * Eager loading relation.
+     * 
+     * @param string $relation
+     * @return QueryContract
+     */
+    public function with(string $relation): QueryContract;
 }
