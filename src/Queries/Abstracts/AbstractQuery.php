@@ -56,7 +56,7 @@ abstract class AbstractQuery implements QueryContract
     /**
      * Including soft deleted models.
      * 
-     * @return QueryContract
+     * @return static
      */
     public function withTrashed(): QueryContract
     {
@@ -69,7 +69,7 @@ abstract class AbstractQuery implements QueryContract
      * Eager loading relation.
      * 
      * @param string $relation
-     * @return QueryContract
+     * @return static
      */
     public function with(string $relation): QueryContract
     {
@@ -96,7 +96,7 @@ abstract class AbstractQuery implements QueryContract
      * Setting underlying query.
      * 
      * @param mixed $query
-     * @return QueryContract
+     * @return static
      */
     public function setQuery($query): QueryContract
     {

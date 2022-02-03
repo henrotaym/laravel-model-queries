@@ -89,7 +89,7 @@ class AbstractQueryTest extends TestCase
     /** @var AccountQuery */
     protected $query;
 
-    /** @var MockInterface */
+    /** @var MockInterface|AccountQuery */
     protected $mocked_query;
 
     /** @var MockInterface */
