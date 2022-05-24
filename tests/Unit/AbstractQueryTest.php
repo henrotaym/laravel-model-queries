@@ -86,6 +86,26 @@ class AbstractQueryTest extends TestCase
        $this->assertChainable($this->mocked_query->with($relation));
     }
 
+    /** @test */
+    public function abstract_query_sorting_by_oldest_elements()
+    {
+        $this->mockQuery();
+        $this->mocked_query->expects()->oldest()->passthru();
+        $this->mocked_underlying_query->expects()->oldest()->andReturnSelf();
+
+       $this->assertChainable($this->mocked_query->oldest());
+    }
+
+    /** @test */
+    public function abstract_query_sorting_by_latest_elements()
+    {
+        $this->mockQuery();
+        $this->mocked_query->expects()->latest()->passthru();
+        $this->mocked_underlying_query->expects()->latest()->andReturnSelf();
+
+       $this->assertChainable($this->mocked_query->latest());
+    }
+
     /** @var AccountQuery */
     protected $query;
 

@@ -59,4 +59,18 @@ interface QueryContract extends AutoRegistrableContract
      * @return static
      */
     public function with(string $relation): QueryContract;
+
+    /**
+     * Oldest elements first.
+     * 
+     * @return static
+     */
+    public function oldest(): QueryContract;
+
+    /**
+     * Latest elements first.
+     * 
+     * @return static
+     */
+    public function latest(): QueryContract;
 }

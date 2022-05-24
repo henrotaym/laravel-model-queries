@@ -79,6 +79,30 @@ abstract class AbstractQuery implements QueryContract
     }
 
     /**
+     * Oldest elements first.
+     * 
+     * @return static
+     */
+    public function oldest(): QueryContract
+    {
+        $this->getQuery()->oldest();
+
+        return $this;
+    }
+
+    /**
+     * Latest elements first.
+     * 
+     * @return static
+     */
+    public function latest(): QueryContract
+    {
+        $this->getQuery()->latest();
+
+        return $this;
+    }
+
+    /**
      * Getting underlying query.
      * 
      * @return mixed
