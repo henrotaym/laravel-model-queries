@@ -1,7 +1,9 @@
 <?php
 namespace Henrotaym\LaravelModelQueries\Queries\Abstracts;
 
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Henrotaym\LaravelModelQueries\Queries\Contracts\QueryContract;
 
 /**
@@ -19,7 +21,7 @@ abstract class AbstractQuery implements QueryContract
     /**
      * Underlying query
      * 
-     * @var mixed
+     * @var QueryBuilder|EloquentBuilder
      */
     private $query;
 
@@ -105,7 +107,7 @@ abstract class AbstractQuery implements QueryContract
     /**
      * Getting underlying query.
      * 
-     * @return mixed
+     * @return QueryBuilder|EloquentBuilder
      */
     public function getQuery()
     {
@@ -125,6 +127,32 @@ abstract class AbstractQuery implements QueryContract
     public function setQuery($query): QueryContract
     {
         $this->query = $query;
+
+        return $this;
+    }
+
+    /**
+     * Limiting results retrieved to given quantity.
+     * 
+     * @param int $limit Won't get more results than this.
+     * @return static
+     */
+    public function limit(int $limit): QueryContract
+    {
+        $this->getQuery()->limit($limit);
+
+        return $this;
+    }
+
+    /**
+     * Skipping given offset results.
+     * 
+     * @param int $offset
+     * @return static
+     */
+    public function offset(int $offset): QueryContract
+    {
+        $this->getQuery()->offset($offset);
 
         return $this;
     }

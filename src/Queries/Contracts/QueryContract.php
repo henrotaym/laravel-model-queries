@@ -73,4 +73,20 @@ interface QueryContract extends AutoRegistrableContract
      * @return static
      */
     public function latest(): QueryContract;
+
+    /**
+     * Limiting results quantity to given value.
+     * 
+     * @param int $limit.
+     * @return static
+     */
+    public function limit(int $limit): QueryContract;
+
+    /**
+     * Skipping given value amount of results.
+     * 
+     * @param int $offset
+     * @return static
+     */
+    public function offset(int $offset): QueryContract;
 }
