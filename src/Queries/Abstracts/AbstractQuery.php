@@ -159,14 +159,14 @@ abstract class AbstractQuery implements QueryContract
 
     public function where(callable $callback): QueryContract
     {
-        $this->getQuery()->where(fn ($query) => $this->getGroupedWhereClause($query, $callback));
+        $this->getQuery()->where(fn ($query) => $this->getGroupedWhereClause($query, $callback)->getQuery());
 
         return $this;
     }
 
     public function orWhere(callable $callback): QueryContract
     {
-        $this->getQuery()->orWhere(fn ($query) => $this->getGroupedWhereClause($query, $callback));
+        $this->getQuery()->orWhere(fn ($query) => $this->getGroupedWhereClause($query, $callback)->getQuery());
 
         return $this;
     }
@@ -176,6 +176,7 @@ abstract class AbstractQuery implements QueryContract
      * 
      * @param QueryBuilder|EloquentBuilder $query
      * @param callable $callback fn (QueryContract $query) => QueryContract
+     * @return static
      */
     protected function getGroupedWhereClause($query, callable $callback): self
     {
@@ -183,7 +184,6 @@ abstract class AbstractQuery implements QueryContract
         $typedQuery = app()->make(static::class);
         $typedQuery->setQuery($query);
 
-        return $callback($typedQuery)
-            ->getQuery();
+        return $callback($typedQuery);
     }
 }
