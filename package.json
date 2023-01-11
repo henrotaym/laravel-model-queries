@@ -1,6 +1,6 @@
 {
     "name": "laravel-model-queries",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "main": "index.js",
     "repository": "git@github.com:henrotaym/laravel-model-queries.git",
     "author": "Mathieu Henrotay <mathieu.henrotay@gmail.com>",
