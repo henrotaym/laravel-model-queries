@@ -121,7 +121,7 @@ abstract class AbstractQuery implements QueryContract
     /**
      * Setting underlying query.
      * 
-     * @param mixed $query
+     * @param QueryBuilder|EloquentBuilder $query
      * @return static
      */
     public function setQuery($query): QueryContract

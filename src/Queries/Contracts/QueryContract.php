@@ -1,7 +1,9 @@
 <?php
 namespace Henrotaym\LaravelModelQueries\Queries\Contracts;
 
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Henrotaym\LaravelContainerAutoRegister\Services\AutoRegister\Contracts\AutoRegistrableContract;
 
 /**
@@ -33,14 +35,14 @@ interface QueryContract extends AutoRegistrableContract
     /**
      * Getting underlying query.
      * 
-     * @return mixed
+     * @return QueryBuilder|EloquentBuilder
      */
     public function getQuery();
 
     /**
      * Setting underlying query.
      * 
-     * @param mixed $query
+     * @param QueryBuilder|EloquentBuilder $query
      * @return static
      */
     public function setQuery($query): QueryContract;
