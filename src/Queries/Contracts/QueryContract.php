@@ -89,4 +89,20 @@ interface QueryContract extends AutoRegistrableContract
      * @return static
      */
     public function offset(int $offset): QueryContract;
+
+    /**
+     * Grouping in a where clause.
+     * 
+     * @param callable $callback fn (QueryContract $query) => QueryContract
+     * @return static
+     */
+    public function where(callable $callback): QueryContract;
+
+    /**
+     * Grouping in an or where clause.
+     * 
+     * @param callable $callback fn (QueryContract $query) => QueryContract
+     * @return static
+     */
+    public function orWhere(callable $callback): QueryContract;
 }

@@ -156,4 +156,34 @@ abstract class AbstractQuery implements QueryContract
 
         return $this;
     }
+
+    public function where(callable $callback): QueryContract
+    {
+        $this->getQuery()->where(fn ($query) => $this->getGroupedWhereClause($query, $callback));
+
+        return $this;
+    }
+
+    public function orWhere(callable $callback): QueryContract
+    {
+        $this->getQuery()->orWhere(fn ($query) => $this->getGroupedWhereClause($query, $callback));
+
+        return $this;
+    }
+
+    /**
+     * Transforming where clause to laravel query.
+     * 
+     * @param QueryBuilder|EloquentBuilder $query
+     * @param callable $callback fn (QueryContract $query) => QueryContract
+     */
+    protected function getGroupedWhereClause($query, callable $callback): self
+    {
+        /** @var static */
+        $typedQuery = app()->make(static::class);
+        $typedQuery->setQuery($query);
+
+        return $callback($typedQuery)
+            ->getQuery();
+    }
 }
