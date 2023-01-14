@@ -107,4 +107,12 @@ interface QueryContract extends AutoRegistrableContract
      * @return static
      */
     public function orWhere(callable $callback): QueryContract;
+
+    /**
+     * Limiting to models having related models matching given query.
+     * 
+     * @param callable $callback fn (QueryContract $query) => QueryContract
+     * @return static
+     */
+    public function whereHas(string $relation, callable $callback): QueryContract;
 }

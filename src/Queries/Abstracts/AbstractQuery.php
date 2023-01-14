@@ -1,9 +1,10 @@
 <?php
 namespace Henrotaym\LaravelModelQueries\Queries\Abstracts;
 
-use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use ReflectionFunction;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Henrotaym\LaravelModelQueries\Queries\Contracts\QueryContract;
 
 /**
@@ -182,6 +183,28 @@ abstract class AbstractQuery implements QueryContract
     {
         /** @var static */
         $typedQuery = app()->make(static::class);
+        $typedQuery->setQuery($query);
+
+        return $callback($typedQuery);
+    }
+
+    public function whereHas(string $relation, callable $callback): QueryContract
+    {
+        $this->getQuery()->whereHas(
+            $relation,
+            fn ($query) => $this->getWhereHasClause($query, $callback)->getQuery()
+        );
+
+        return $this;
+    }
+
+    protected function getWhereHasClause($query, callable $callback): QueryContract
+    {
+        $reflection = new ReflectionFunction($callback);
+        $queryParameter = $reflection->getParameters()[0];
+        
+        /** @var QueryContract */
+        $typedQuery = app()->make($queryParameter->getType()->getName());
         $typedQuery->setQuery($query);
 
         return $callback($typedQuery);
