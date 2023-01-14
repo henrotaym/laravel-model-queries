@@ -114,5 +114,5 @@ interface QueryContract extends AutoRegistrableContract
      * @param callable $callback fn (QueryContract $query) => QueryContract
      * @return static
      */
-    public function whereHas(string $relation, callable $callback): QueryContract;
+    public function whereHas(string $relation, callable $callback = null): QueryContract;
 }
