@@ -188,12 +188,14 @@ abstract class AbstractQuery implements QueryContract
         return $callback($typedQuery);
     }
 
-    public function whereHas(string $relation, callable $callback = null): QueryContract
+    public function whereHas(string $relation, ?callable $callback = null): QueryContract
     {
         if (is_null($callback)):
-            return $this->getQuery()->whereHas($relation);
+            $this->getQuery()->whereHas($relation);
+
+            return $this;
         endif;
-        
+
         $this->getQuery()->whereHas(
             $relation,
             fn ($query) => $this->getWhereHasClause($query, $callback)->getQuery()
