@@ -1,6 +1,6 @@
 {
     "name": "@henrotaym/laravel-model-queries",
-    "version": "1.6.2",
+    "version": "2.0.0",
     "private": true,
     "license": "MIT",
     "scripts": {
