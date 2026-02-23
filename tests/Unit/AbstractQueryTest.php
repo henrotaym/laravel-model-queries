@@ -2,6 +2,7 @@
 namespace Henrotaym\LaravelModelQueries\Tests\Unit;
 
 use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Henrotaym\LaravelModelQueries\Tests\TestCase;
@@ -10,21 +11,21 @@ use Henrotaym\LaravelModelQueries\Tests\Unit\_Models\Query\AccountQuery;
 
 class AbstractQueryTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function abstract_query_getting_model()
     {
         $this->setQuery();
         $this->assertEquals(Account::class, $this->query->getModel());
     }
 
-    /** @test */
+    #[Test]
     public function abstract_query_getting_underlying_query_if_not_set_explicitely()
     {
         $this->setQuery()
             ->assertInstanceOf(Builder::class, $this->query->getQuery());
     }
 
-    /** @test */
+    #[Test]
     public function abstract_query_setting_underlying_query()
     {
         $underlying = "salut";
@@ -34,7 +35,7 @@ class AbstractQueryTest extends TestCase
         $this->assertEquals($underlying, $this->query->getQuery());
     }
 
-    /** @test */
+    #[Test]
     public function abstract_query_getting_results()
     {
         $this->mockQuery();
@@ -44,7 +45,7 @@ class AbstractQueryTest extends TestCase
         $this->assertTrue($this->mocked_query->get()->isEmpty());
     }
 
-    /** @test */
+    #[Test]
     public function abstract_query_getting_first_result()
     {
         $this->mockQuery();
@@ -54,7 +55,7 @@ class AbstractQueryTest extends TestCase
        $this->assertNull($this->mocked_query->first());
     }
 
-    /** @test */
+    #[Test]
     public function abstract_query_counting_results()
     {
         $count = 5;
@@ -65,7 +66,7 @@ class AbstractQueryTest extends TestCase
        $this->assertEquals($count, $this->mocked_query->count());
     }
 
-    /** @test */
+    #[Test]
     public function abstract_query_including_trashed_results()
     {
         $this->mockQuery();
@@ -75,7 +76,7 @@ class AbstractQueryTest extends TestCase
        $this->assertChainable($this->mocked_query->withTrashed());
     }
 
-    /** @test */
+    #[Test]
     public function abstract_query_eager_loading_relation()
     {
         $relation = "test";
@@ -86,7 +87,7 @@ class AbstractQueryTest extends TestCase
        $this->assertChainable($this->mocked_query->with($relation));
     }
 
-    /** @test */
+    #[Test]
     public function abstract_query_sorting_by_oldest_elements()
     {
         $this->mockQuery();
@@ -96,7 +97,7 @@ class AbstractQueryTest extends TestCase
        $this->assertChainable($this->mocked_query->oldest());
     }
 
-    /** @test */
+    #[Test]
     public function abstract_query_sorting_by_latest_elements()
     {
         $this->mockQuery();

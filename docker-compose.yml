@@ -1,0 +1,9 @@
+services:
+  cli:
+    build:
+      context: .
+      target: cli
+      dockerfile: Dockerfile
+    image: "laravel-model-queries-php-local"
+    volumes:
+      - ./:/opt/apps/app
